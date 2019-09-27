@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--实现接口  包名.接口名-->
+<mapper namespace="com.lanxin.dao.UsersDao">
+
+<!--根据用户名查密码-->
+    <select id="getPassWordByUsername" parameterType="java.lang.String" resultType="com.lanxin.bean.Users">
+        select pass from users where username=#{username}
+    </select>
+
+<!--根据用户名查询所属角色-->
+   <select id="getRolesByUsernae" parameterType="java.lang.String" resultType="com.lanxin.bean.User_Roles">
+       select role_name from user_roles where username=#{username}
+   </select>
+
+<!--根据用户名查询所属权限-->
+   <select id="getPermissionByUsername" parameterType="java.lang.String" resultType="com.lanxin.bean.User_Roles">
+       select p.permission from user_roles u left join roles_permissions p on u.role_name=p.role_name
+       where u.username=#{username}
+   </select>
+</mapper>
